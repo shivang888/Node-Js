@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        form {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 40%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+
+        form table td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        form input[type="text"],
+        form select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        form button {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/updateData/<%= storeData.id %>" method="post">
+        <table>
+            <tr>
+                <td><label for="">Book Name :</label></td>
+                <td> <input type="text" placeholder="Enter Book Name" value="<%= storeData.bookname %>" name="bookname">
+                </td>
+            </tr>
+            <tr>
+                <td> <label for="">Price :</label></td>
+                <td><input type="text" placeholder="Enter Book Price" value="<%= storeData.price %>" name="price"></td>
+            </tr>
+            <tr>
+                <td><label for="">Semester : </label></td>
+                <td>
+                    <input type="radio" name="semester" value="Sem-1" <%=storeData.semester === "Sem-1"
+                        ? "checked" : "" %> />Sem-1
+                    <input type="radio" name="semester" value="Sem-2" <%=storeData.semester === "Sem-2"
+                        ? "checked" : "" %> />Sem-2
+                </td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>
+
+
+                    <label for="Category" style="margin-top: 15px;">Category:</label>
+                    <select name="Category" required>
+                        <option value="">Select Category</option>
+                        <option value="Maths" <%=storeData.Category==="Maths" ? "selected" : "" %>>Maths
+                        </option>
+                        <option value="Science" <%=storeData.Category==="Science" ? "selected" : "" %>>Science</option>
+                        <option value="Social Science" <%=storeData.Category==="Social Science" ? "selected" : "" %>
+                            >Social Science</option>
+                        <option value="Physics" <%=storeData.Category==="Physics" ? "selected" : "" %>>Physics</option>
+                        <option value="Chemistry" <%=storeData.Category==="Chemistry" ? "selected" : "" %>>Chemistry
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><button type="submit">Update Data</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
