@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+
+/* insta-main div */
+.insta-main{width: 25%; height: 493px; border: 0.1px solid rgba(0, 0, 0, 0.201); margin: auto; margin-top: 110px;}
+/* insta-icon */
+.insta-icon{text-align: center; line-height:180px;}     
+/* main-input div */
+.main-input{position: relative;}
+/* spanId */
+#placeholder-1{position: absolute; top: 17px; left: 60px; font-size: 14px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+#placeholder-2{position: absolute; z-index: 1; left: 60px; top: 86px;font-size: 16px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+/* input id */
+#username{width: 72%; height: 50px; margin-left: 14%;padding-left: 2%;}
+#password{width: 72%; height: 50px; margin-left: 14%;padding-left: 2%; position: relative;}
+/* hide show btn */
+#hide-show{position: absolute; cursor: pointer; width: 4%; top: 85px; left: 280px; border: none; font-weight: bold; color: rgba(0, 0, 0, 0.538); font-size: 15px;}
+/* login btn class */
+.login-btn{width: 70%;height: 30px;margin-left: 14%; border: none;  border-radius: 8px; background-color: rgb(0, 149, 246); color: white; font-size: 17px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;}
+
+/* or line class */
+.or{width: 68%;border-top: 0.8px solid rgba(0, 0, 0, 0.41); margin: auto; margin-top: 11%;}
+/* or target p */
+.or>div>p{text-align: center; color: rgba(0, 0, 0, 0.499); font-weight: 800; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+/* .or target div */
+.or>div{width: 12%; margin: auto; background-color: rgb(255, 255, 255);margin-top: -4%;}
+
+/* login facebook a tag */
+.login-facebook{text-align: center; margin-top: 8%; font-weight: 600; color: #385185; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+.login-facebook>a{text-decoration: none;}
+/* forget password p tag */
+.forgot-p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgba(0, 0, 0, 0.69); cursor: pointer;}
+
+/* sign-up div css  */
+.sign-up{width: 25%; height: 70px; border: 0.1px solid rgba(0, 0, 0, 0.201); margin: auto;}
+.sign-up>p{text-align: center; font-size: 18px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; line-height: 70px; letter-spacing: 0.6px;}
+.sign-up>p>span{padding-left: 1%;}
+.sign-up>p>span>a{text-decoration: none; color:rgb(0, 149, 246); font-weight: bold;}
+
+/* Get the app h5 tag css */
+h5{text-align: center; font-size: 20px; color: rgba(0, 0, 0, 0.52); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+
+/* icon main */
+.icon-main{text-align: center;}
+.img-1{width: 10%;}
+.img-2{width: 8%;}
+    </style>
+</head>
+<body>
+    <!-- insta-main started -->
+    <div class="insta-main">
+        <!-- insta-icon -->
+        <div class="insta-icon"><i data-visualcompletion="css-img" aria-label="Instagram" class="" role="img" style="background-image: url(&quot;https://static.cdninstagram.com/rsrc.php/v3/yM/r/8n91YnfPq0s.png&quot;); background-position: 0px -52px; background-size: auto; width: 175px; height: 51px; background-repeat: no-repeat; display: inline-block;"></i>
+        </div>
+        <!-- main-input started -->
+        <div class="main-input">
+          <!-- spanId-1 -->
+          <span id="placeholder-1">Phone number, username, or email</span>
+          <!-- email input -->
+         <input  oninput="email(this)" id="username" type="text"> <br><br>
+          <!-- spanId-2 -->
+         <span id="placeholder-2">Password</span>
+         <!-- password input -->
+         <input oninput="password(this)"  id="password" type="password"> <button id="hide-show">Show</button>
+        </div> <br>
+
+         <!-- login button -->
+         <button class="login-btn" onclick="loginbtn()">Log in</button>
+
+         <!-- or line div -->
+         <div class="or">
+            <div><p>OR</p></div>
+         </div>
+
+         <div class="login-facebook">
+            <a target="_blank" href="https://www.facebook.com/login/"><i class="fa-brands fa-lg fa-facebook" style="color: #385185;"></i> Log in With Facebook</a>
+         </div> <br>
+
+         <p class="forgot-p">Forgot password?</p>
+        <!-- insta-main closed -->
+    </div> <br>
+
+    <div class="sign-up">
+        <p>Don't have an account?<span><a href="">Sign up</a></span></p>
+    </div> <br>
+    
+    <h5>Get the app.</h5> <br>
+      <div class="icon-main">
+        <img class="img-1" src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="">
+        <img class="img-2" src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="">
+      </div>
+
+      <script>
+        // acess
+let a = document.querySelector("#password").value;
+let b = document.querySelector("#username").value;
+let c = document.querySelector('#placeholder-1');
+let d = document.querySelector('#placeholder-2');
+let toogle = document.querySelector("#hide-show");
+
+
+
+// click Event 
+
+toogle.addEventListener("click",function(){
+    if(a.type == "password"){
+        a.type = "text";
+        toogle.innerHTML = "Hide"
+    }
+    else{
+        a.type = "password";
+         toogle.innerHTML = "Show"
+    }   
+});
+
+
+// function oninput
+
+function email(b) {
+    if (b.value == "") {
+        c.style.top = "16px"
+    } else {
+        c.style.top = "-1px"
+    }
+}
+
+function password(a) {
+    if (a.value == "") {
+        d.style.top = "86px"
+    } else {
+        d.style.top = "72px"
+    }
+}
+
+//  let loginbtn = document.querySelector('.login-btn');
+
+function loginbtn() {
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    if (username && password) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+
+        alert('Username aur Password localStorage me save kiye gaye!');
+    } else {
+        alert('Please fill both username and password.');
+    }
+}
+
+      </script>
+</body>
+</html>
