@@ -22,7 +22,7 @@ res.render("bookMyShow" , {dataData});
 }
 })
 app.get("/imageUpload" , (req , res)=> {
-    res.render("imageUpload")
+    res.render("imageUpload");
 })
 
 app.post("/insertData" ,  UserModel.imageUpload ,async  (req,res)=> {
