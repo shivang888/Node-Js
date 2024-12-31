@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #media-uploader1 .dz-message {
+	font-size: 25px;
+	display: table-cell;
+	vertical-align: middle;
+	color: #a0a5aa;
+}
+/* ********************************************* */
+#media-uploader1 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	min-height: 150px;
+	height: 200px;
+	border: 2px solid rgba(0, 0, 0, 0.3);
+	background: white;
+	display: table;
+	padding: 20px 20px;
+}
+#media-uploader1.dz-clickable {
+	cursor: pointer;
+}
+#media-uploader1.dz-clickable * {
+	cursor: default;
+}
+#media-uploader1.dz-clickable .dz-message,
+#media-uploader1.dz-clickable .dz-message * {
+	cursor: pointer;
+}
+#media-uploader1.dz-started .dz-message {
+	display: none;
+}
+#media-uploader1.dz-drag-hover {
+	border-style: solid;
+}
+#media-uploader1.dz-drag-hover .dz-message {
+	opacity: 0.5;
+}
+#media-uploader1 .dz-message {
+	text-align: center;
+	margin: auto 0 !important;
+}
+#media-uploader1 .dz-preview {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	margin: 16px;
+	min-height: 100px;
+}
+#media-uploader1 .dz-preview:hover {
+	z-index: 1000;
+}
+#media-uploader1 .dz-preview:hover .dz-details {
+	opacity: 1;
+}
+#media-uploader1 .dz-preview.dz-file-preview .dz-image {
+	border-radius: 20px;
+	background: #999;
+	background: linear-gradient(to bottom, #eee, #ddd);
+}
+#media-uploader1 .dz-preview.dz-file-preview .dz-details {
+	opacity: 1;
+}
+#media-uploader1 .dz-preview.dz-image-preview {
+	background: white;
+	border: 1px #333 dashed;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=124, Color=#7A7A7A)"; /*IE 8*/
+	-moz-box-shadow: 4px 6px 0 rgba(122, 122, 122, 0.7); /*FF 3.5+*/
+	-webkit-box-shadow: 4px 6px 0 rgba(122, 122, 122, 0.7); /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+	box-shadow: 4px 6px 0 rgba(122, 122, 122, 0.7); /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=0, Direction=135, Color=#7A7A7A); /*IE 5.5-7*/
+}
+#media-uploader1 .dz-preview.dz-image-preview .dz-details {
+	-webkit-transition: opacity 0.2s linear;
+	-moz-transition: opacity 0.2s linear;
+	-ms-transition: opacity 0.2s linear;
+	-o-transition: opacity 0.2s linear;
+	transition: opacity 0.2s linear;
+}
+#media-uploader1 .dz-preview .dz-remove {
+	font-size: 14px;
+	text-align: center;
+	display: block;
+	cursor: pointer;
+	border: none;
+}
+#media-uploader1 .dz-preview .dz-remove:hover {
+	text-decoration: underline;
+}
+#media-uploader1 .dz-preview:hover .dz-details {
+	opacity: 1;
+}
+#media-uploader1 .dz-preview .dz-details {
+	z-index: 20;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	font-size: 13px;
+	min-width: 100%;
+	max-width: 100%;
+	padding: 2em 1em;
+	text-align: center;
+	color: rgba(0, 0, 0, 0.9);
+	line-height: 150%;
+}
+#media-uploader1 .dz-preview .dz-details .dz-size {
+	margin-bottom: 1em;
+	font-size: 16px;
+}
+#media-uploader1 .dz-preview .dz-details .dz-filename {
+	white-space: nowrap;
+}
+#media-uploader1 .dz-preview .dz-details .dz-filename:hover span {
+	border: 1px solid rgba(200, 200, 200, 0.8);
+	background-color: rgba(255, 255, 255, 0.8);
+}
+#media-uploader1 .dz-preview .dz-details .dz-filename:not(:hover) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#media-uploader1 .dz-preview .dz-details .dz-filename:not(:hover) span {
+	border: 1px solid transparent;
+}
+#media-uploader1 .dz-preview .dz-details .dz-filename span,
+#media-uploader1 .dz-preview .dz-details .dz-size span {
+	background-color: rgba(255, 255, 255, 0.4);
+	padding: 0 0.4em;
+	border-radius: 3px;
+}
+#media-uploader1 .dz-preview:hover .dz-image img {
+	-webkit-transform: scale(1.05, 1.05);
+	-moz-transform: scale(1.05, 1.05);
+	-ms-transform: scale(1.05, 1.05);
+	-o-transform: scale(1.05, 1.05);
+	transform: scale(1.05, 1.05);
+	-webkit-filter: blur(8px);
+	filter: blur(8px);
+}
+#media-uploader1 .dz-preview .dz-image {
+	border-radius: 12px;
+	overflow: hidden;
+	width: 120px;
+	height: 120px;
+	position: relative;
+	display: block;
+	z-index: 10;
+}
+#media-uploader1 .dz-preview .dz-image img {
+	display: block;
+}
+#media-uploader1 .dz-preview.dz-success .dz-success-mark {
+	-webkit-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+	-moz-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+	-ms-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+	-o-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+	animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+}
+#media-uploader1 .dz-preview.dz-error .dz-error-mark {
+	opacity: 1;
+	-webkit-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+	-moz-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+	-ms-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+	-o-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+	animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+}
+#media-uploader1 .dz-preview .dz-success-mark,
+#media-uploader1 .dz-preview .dz-error-mark {
+	pointer-events: none;
+	opacity: 0;
+	z-index: 500;
+	position: absolute;
+	display: block;
+	top: 50%;
+	left: 50%;
+	margin-left: -27px;
+	margin-top: -27px;
+}
+#media-uploader1 .dz-preview .dz-success-mark svg,
+#media-uploader1 .dz-preview .dz-error-mark svg {
+	display: block;
+	width: 54px;
+	height: 54px;
+}
+#media-uploader1 .dz-preview.dz-processing .dz-progress {
+	opacity: 1;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-ms-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+#media-uploader1 .dz-preview.dz-complete .dz-progress {
+	opacity: 0;
+	-webkit-transition: opacity 0.4s ease-in;
+	-moz-transition: opacity 0.4s ease-in;
+	-ms-transition: opacity 0.4s ease-in;
+	-o-transition: opacity 0.4s ease-in;
+	transition: opacity 0.4s ease-in;
+}
+#media-uploader1 .dz-preview:not(.dz-processing) .dz-progress {
+	-webkit-animation: pulse 6s ease infinite;
+	-moz-animation: pulse 6s ease infinite;
+	-ms-animation: pulse 6s ease infinite;
+	-o-animation: pulse 6s ease infinite;
+	animation: pulse 6s ease infinite;
+}
+#media-uploader1 .dz-preview .dz-progress {
+	opacity: 1;
+	z-index: 1000;
+	pointer-events: none;
+	position: absolute;
+	height: 16px;
+	left: 50%;
+	top: 50%;
+	margin-top: -8px;
+	width: 80px;
+	margin-left: -40px;
+	background: rgba(255, 255, 255, 0.9);
+	-webkit-transform: scale(1);
+	border-radius: 8px;
+	overflow: hidden;
+}
+#media-uploader1 .dz-preview .dz-progress .dz-upload {
+	background: #333;
+	background: -webkit-linear-gradient(#666, #444);
+	background: -o-linear-gradient(#666, #444);
+	background: linear-gradient(#666, #444);
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	-webkit-transition: width 300ms ease-in-out;
+	-moz-transition: width 300ms ease-in-out;
+	-ms-transition: width 300ms ease-in-out;
+	-o-transition: width 300ms ease-in-out;
+	transition: width 300ms ease-in-out;
+}
+#media-uploader1 .dz-preview.dz-error .dz-error-message {
+	display: block;
+}
+#media-uploader1 .dz-preview.dz-error:hover .dz-error-message {
+	opacity: 1;
+	pointer-events: auto;
+}
+#media-uploader1 .dz-preview .dz-error-message {
+	pointer-events: none;
+	z-index: 1000;
+	position: absolute;
+	display: block;
+	display: none;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	-ms-transition: opacity 0.3s ease;
+	-o-transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease;
+	border-radius: 8px;
+	font-size: 13px;
+	top: 130px;
+	left: -10px;
+	width: 140px;
+	background: #be2626;
+	background: linear-gradient(to bottom, #be2626, #a92222);
+	padding: 0.5em 1.2em;
+	color: white;
+}
+#media-uploader1 .dz-preview .dz-error-message:after {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: 64px;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid #be2626;
+}
+/* ********************************************* */
+#media-uploader1 .dz-preview .dz-image-preview {
+	background-color: transparent;
+}
+/* estilos de dropzone 2  */
+#media-uploader2 {
+	border: 4px dashed rgb(0, 115, 170);
+	background: none;
+	height: 200px;
+}
+
+#media-uploader2 .dz-message {
+	font-size: 25px;
+	color: #a0a5aa;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h2>Product Order Form</h2>
+        </div>
+      <div class="d-flex">
+        <form action="" method="">
+          <label>
+            <span class="fname">First Name <span class="required">*</span></span>
+            <input type="text" name="fname">
+          </label>
+          <label>
+            <span class="lname">Last Name <span class="required">*</span></span>
+            <input type="text" name="lname">
+          </label>
+          <label>
+            <span>Company Name (Optional)</span>
+            <input type="text" name="cn">
+          </label>
+          <label>
+            <span>Country <span class="required">*</span></span>
+            <select name="selection">
+              <option value="select">Select a country...</option>
+              <option value="AFG">Afghanistan</option>
+              <option value="ALA">Åland Islands</option>
+              <option value="ALB">Albania</option>
+              <option value="DZA">Algeria</option>
+              <option value="ASM">American Samoa</option>
+              <option value="AND">Andorra</option>
+              <option value="AGO">Angola</option>
+              <option value="AIA">Anguilla</option>
+              <option value="ATA">Antarctica</option>
+              <option value="ATG">Antigua and Barbuda</option>
+              <option value="ARG">Argentina</option>
+              <option value="ARM">Armenia</option>
+              <option value="ABW">Aruba</option>
+              <option value="AUS">Australia</option>
+              <option value="AUT">Austria</option>
+              <option value="AZE">Azerbaijan</option>
+              <option value="BHS">Bahamas</option>
+              <option value="BHR">Bahrain</option>
+              <option value="BGD">Bangladesh</option>
+              <option value="BRB">Barbados</option>
+              <option value="BLR">Belarus</option>
+              <option value="BEL">Belgium</option>
+              <option value="BLZ">Belize</option>
+              <option value="BEN">Benin</option>
+              <option value="BMU">Bermuda</option>
+              <option value="BTN">Bhutan</option>
+              <option value="BOL">Bolivia, Plurinational State of</option>
+              <option value="BES">Bonaire, Sint Eustatius and Saba</option>
+              <option value="BIH">Bosnia and Herzegovina</option>
+              <option value="BWA">Botswana</option>
+              <option value="BVT">Bouvet Island</option>
+              <option value="BRA">Brazil</option>
+              <option value="IOT">British Indian Ocean Territory</option>
+              <option value="BRN">Brunei Darussalam</option>
+              <option value="BGR">Bulgaria</option>
+              <option value="BFA">Burkina Faso</option>
+              <option value="BDI">Burundi</option>
+              <option value="KHM">Cambodia</option>
+              <option value="CMR">Cameroon</option>
+              <option value="CAN">Canada</option>
+              <option value="CPV">Cape Verde</option>
+              <option value="CYM">Cayman Islands</option>
+              <option value="CAF">Central African Republic</option>
+              <option value="TCD">Chad</option>
+              <option value="CHL">Chile</option>
+              <option value="CHN">China</option>
+              <option value="CXR">Christmas Island</option>
+              <option value="CCK">Cocos (Keeling) Islands</option>
+              <option value="COL">Colombia</option>
+              <option value="COM">Comoros</option>
+              <option value="COG">Congo</option>
+              <option value="COD">Congo, the Democratic Republic of the</option>
+              <option value="COK">Cook Islands</option>
+              <option value="CRI">Costa Rica</option>
+              <option value="CIV">Côte d'Ivoire</option>
+              <option value="HRV">Croatia</option>
+              <option value="CUB">Cuba</option>
+              <option value="CUW">Curaçao</option>
+              <option value="CYP">Cyprus</option>
+              <option value="CZE">Czech Republic</option>
+              <option value="DNK">Denmark</option>
+              <option value="DJI">Djibouti</option>
+              <option value="DMA">Dominica</option>
+              <option value="DOM">Dominican Republic</option>
+              <option value="ECU">Ecuador</option>
+              <option value="EGY">Egypt</option>
+              <option value="SLV">El Salvador</option>
+              <option value="GNQ">Equatorial Guinea</option>
+              <option value="ERI">Eritrea</option>
+              <option value="EST">Estonia</option>
+              <option value="ETH">Ethiopia</option>
+              <option value="FLK">Falkland Islands (Malvinas)</option>
+              <option value="FRO">Faroe Islands</option>
+              <option value="FJI">Fiji</option>
+              <option value="FIN">Finland</option>
+              <option value="FRA">France</option>
+              <option value="GUF">French Guiana</option>
+              <option value="PYF">French Polynesia</option>
+              <option value="ATF">French Southern Territories</option>
+              <option value="GAB">Gabon</option>
+              <option value="GMB">Gambia</option>
+              <option value="GEO">Georgia</option>
+              <option value="DEU">Germany</option>
+              <option value="GHA">Ghana</option>
+              <option value="GIB">Gibraltar</option>
+              <option value="GRC">Greece</option>
+              <option value="GRL">Greenland</option>
+              <option value="GRD">Grenada</option>
+              <option value="GLP">Guadeloupe</option>
+              <option value="GUM">Guam</option>
+              <option value="GTM">Guatemala</option>
+              <option value="GGY">Guernsey</option>
+              <option value="GIN">Guinea</option>
+              <option value="GNB">Guinea-Bissau</option>
+              <option value="GUY">Guyana</option>
+              <option value="HTI">Haiti</option>
+              <option value="HMD">Heard Island and McDonald Islands</option>
+              <option value="VAT">Holy See (Vatican City State)</option>
+              <option value="HND">Honduras</option>
+              <option value="HKG">Hong Kong</option>
+              <option value="HUN">Hungary</option>
+              <option value="ISL">Iceland</option>
+              <option value="IND">India</option>
+              <option value="IDN">Indonesia</option>
+              <option value="IRN">Iran, Islamic Republic of</option>
+              <option value="IRQ">Iraq</option>
+              <option value="IRL">Ireland</option>
+              <option value="IMN">Isle of Man</option>
+              <option value="ISR">Israel</option>
+              <option value="ITA">Italy</option>
+              <option value="JAM">Jamaica</option>
+              <option value="JPN">Japan</option>
+              <option value="JEY">Jersey</option>
+              <option value="JOR">Jordan</option>
+              <option value="KAZ">Kazakhstan</option>
+              <option value="KEN">Kenya</option>
+              <option value="KIR">Kiribati</option>
+              <option value="PRK">Korea, Democratic People's Republic of</option>
+              <option value="KOR">Korea, Republic of</option>
+              <option value="KWT">Kuwait</option>
+              <option value="KGZ">Kyrgyzstan</option>
+              <option value="LAO">Lao People's Democratic Republic</option>
+              <option value="LVA">Latvia</option>
+              <option value="LBN">Lebanon</option>
+              <option value="LSO">Lesotho</option>
+              <option value="LBR">Liberia</option>
+              <option value="LBY">Libya</option>
+              <option value="LIE">Liechtenstein</option>
+              <option value="LTU">Lithuania</option>
+              <option value="LUX">Luxembourg</option>
+              <option value="MAC">Macao</option>
+              <option value="MKD">Macedonia, the former Yugoslav Republic of</option>
+              <option value="MDG">Madagascar</option>
+              <option value="MWI">Malawi</option>
+              <option value="MYS">Malaysia</option>
+              <option value="MDV">Maldives</option>
+              <option value="MLI">Mali</option>
+              <option value="MLT">Malta</option>
+              <option value="MHL">Marshall Islands</option>
+              <option value="MTQ">Martinique</option>
+              <option value="MRT">Mauritania</option>
+              <option value="MUS">Mauritius</option>
+              <option value="MYT">Mayotte</option>
+              <option value="MEX">Mexico</option>
+              <option value="FSM">Micronesia, Federated States of</option>
+              <option value="MDA">Moldova, Republic of</option>
+              <option value="MCO">Monaco</option>
+              <option value="MNG">Mongolia</option>
+              <option value="MNE">Montenegro</option>
+              <option value="MSR">Montserrat</option>
+              <option value="MAR">Morocco</option>
+              <option value="MOZ">Mozambique</option>
+              <option value="MMR">Myanmar</option>
+              <option value="NAM">Namibia</option>
+              <option value="NRU">Nauru</option>
+              <option value="NPL">Nepal</option>
+              <option value="NLD">Netherlands</option>
+              <option value="NCL">New Caledonia</option>
+              <option value="NZL">New Zealand</option>
+              <option value="NIC">Nicaragua</option>
+              <option value="NER">Niger</option>
+              <option value="NGA">Nigeria</option>
+              <option value="NIU">Niue</option>
+              <option value="NFK">Norfolk Island</option>
+              <option value="MNP">Northern Mariana Islands</option>
+              <option value="NOR">Norway</option>
+              <option value="OMN">Oman</option>
+              <option value="PAK">Pakistan</option>
+              <option value="PLW">Palau</option>
+              <option value="PSE">Palestinian Territory, Occupied</option>
+              <option value="PAN">Panama</option>
+              <option value="PNG">Papua New Guinea</option>
+              <option value="PRY">Paraguay</option>
+              <option value="PER">Peru</option>
+              <option value="PHL">Philippines</option>
+              <option value="PCN">Pitcairn</option>
+              <option value="POL">Poland</option>
+              <option value="PRT">Portugal</option>
+              <option value="PRI">Puerto Rico</option>
+              <option value="QAT">Qatar</option>
+              <option value="REU">Réunion</option>
+              <option value="ROU">Romania</option>
+              <option value="RUS">Russian Federation</option>
+              <option value="RWA">Rwanda</option>
+              <option value="BLM">Saint Barthélemy</option>
+              <option value="SHN">Saint Helena, Ascension and Tristan da Cunha</option>
+              <option value="KNA">Saint Kitts and Nevis</option>
+              <option value="LCA">Saint Lucia</option>
+              <option value="MAF">Saint Martin (French part)</option>
+              <option value="SPM">Saint Pierre and Miquelon</option>
+              <option value="VCT">Saint Vincent and the Grenadines</option>
+              <option value="WSM">Samoa</option>
+              <option value="SMR">San Marino</option>
+              <option value="STP">Sao Tome and Principe</option>
+              <option value="SAU">Saudi Arabia</option>
+              <option value="SEN">Senegal</option>
+              <option value="SRB">Serbia</option>
+              <option value="SYC">Seychelles</option>
+              <option value="SLE">Sierra Leone</option>
+              <option value="SGP">Singapore</option>
+              <option value="SXM">Sint Maarten (Dutch part)</option>
+              <option value="SVK">Slovakia</option>
+              <option value="SVN">Slovenia</option>
+              <option value="SLB">Solomon Islands</option>
+              <option value="SOM">Somalia</option>
+              <option value="ZAF">South Africa</option>
+              <option value="SGS">South Georgia and the South Sandwich Islands</option>
+              <option value="SSD">South Sudan</option>
+              <option value="ESP">Spain</option>
+              <option value="LKA">Sri Lanka</option>
+              <option value="SDN">Sudan</option>
+              <option value="SUR">Suriname</option>
+              <option value="SJM">Svalbard and Jan Mayen</option>
+              <option value="SWZ">Swaziland</option>
+              <option value="SWE">Sweden</option>
+              <option value="CHE">Switzerland</option>
+              <option value="SYR">Syrian Arab Republic</option>
+              <option value="TWN">Taiwan, Province of China</option>
+              <option value="TJK">Tajikistan</option>
+              <option value="TZA">Tanzania, United Republic of</option>
+              <option value="THA">Thailand</option>
+              <option value="TLS">Timor-Leste</option>
+              <option value="TGO">Togo</option>
+              <option value="TKL">Tokelau</option>
+              <option value="TON">Tonga</option>
+              <option value="TTO">Trinidad and Tobago</option>
+              <option value="TUN">Tunisia</option>
+              <option value="TUR">Turkey</option>
+              <option value="TKM">Turkmenistan</option>
+              <option value="TCA">Turks and Caicos Islands</option>
+              <option value="TUV">Tuvalu</option>
+              <option value="UGA">Uganda</option>
+              <option value="UKR">Ukraine</option>
+              <option value="ARE">United Arab Emirates</option>
+              <option value="GBR">United Kingdom</option>
+              <option value="USA">United States</option>
+              <option value="UMI">United States Minor Outlying Islands</option>
+              <option value="URY">Uruguay</option>
+              <option value="UZB">Uzbekistan</option>
+              <option value="VUT">Vanuatu</option>
+              <option value="VEN">Venezuela, Bolivarian Republic of</option>
+              <option value="VNM">Viet Nam</option>
+              <option value="VGB">Virgin Islands, British</option>
+              <option value="VIR">Virgin Islands, U.S.</option>
+              <option value="WLF">Wallis and Futuna</option>
+              <option value="ESH">Western Sahara</option>
+              <option value="YEM">Yemen</option>
+              <option value="ZMB">Zambia</option>
+              <option value="ZWE">Zimbabwe</option>
+            </select>
+          </label>
+          <label>
+            <span>Street Address <span class="required">*</span></span>
+            <input type="text" name="houseadd" placeholder="House number and street name" required>
+          </label>
+          <label>
+            <span>&nbsp;</span>
+            <input type="text" name="apartment" placeholder="Apartment, suite, unit etc. (optional)">
+          </label>
+          <label>
+            <span>Town / City <span class="required">*</span></span>
+            <input type="text" name="city"> 
+          </label>
+          <label>
+            <span>State / County <span class="required">*</span></span>
+            <input type="text" name="city"> 
+          </label>
+          <label>
+            <span>Postcode / ZIP <span class="required">*</span></span>
+            <input type="text" name="city"> 
+          </label>
+          <label>
+            <span>Phone <span class="required">*</span></span>
+            <input type="tel" name="city"> 
+          </label>
+          <label>
+            <span>Email Address <span class="required">*</span></span>
+            <input type="email" name="city"> 
+          </label>
+        </form>
+        <div class="Yorder">
+          <table>
+            <tr>
+              <th colspan="2">Your order</th>
+            </tr>
+            <tr>
+              <td>Product Name x 2(Qty)</td>
+              <td>$88.00</td>
+            </tr>
+            <tr>
+              <td>Subtotal</td>
+              <td>$88.00</td>
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td>Free shipping</td>
+            </tr>
+          </table><br>
+          <div>
+            <input type="radio" name="dbt" value="dbt" checked> Direct Bank Transfer
+          </div>
+          <p>
+              Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+          </p>
+          <div>
+            <input type="radio" name="dbt" value="cd"> Cash on Delivery
+          </div>
+          <div>
+            <input type="radio" name="dbt" value="cd"> Paypal <span>
+            <img src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg" alt="" width="50">
+            </span>
+          </div>
+          <button type="button">Place Order</button>
+        </div><!-- Yorder -->
+       </div>
+      </div>
+</body>
+</html>

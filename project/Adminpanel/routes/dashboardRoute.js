@@ -25,7 +25,7 @@ dashboardRouter.post("/insertData", async (req, res) => {
   try {
     await UserModel.create(req.body);
     console.log("User created");
-    res.redirect("/signIn");
+    res.redirect("/");
   } catch (err) {
     console.log(err);
   }
@@ -72,8 +72,7 @@ dashboardRouter.post("/getChangePassword", (req, res) => {
 dashboardRouter.get("/logout", (req, res) => {
   // res.clearCookie("auth");
   req.session.destroy(function (err) {
-    // cannot access session here
-    // console.log(err);
+    
   });
   res.redirect("/");
 });
@@ -92,13 +91,13 @@ dashboardRouter.post("/forgotPassword", async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "prabhssgg@gmail.com",
-        pass: "jkyn vite uqau jlmv",
+        user: "shivangkad9@gmail.com",
+        pass: "npfi xieh ibgb uuzi",
       },
     });
 
     var mailOptions = {
-      from: "prabhssgg@gmail.com",
+      from: "shivangkad9@gmail.com",
       to: getUser.email,
       subject: "OTP",
       text: `OTP -${otp}`,
@@ -123,8 +122,8 @@ dashboardRouter.get("/otpPage", (req, res) => {
 
 dashboardRouter.post("/checkOtp", (req, res) => {
   const cookieOtp = req.cookies["getOtp"];
-  // console.log(cookieOtp);
-  // console.log(req.body);
+  console.log(cookieOtp);
+  console.log(req.body);
   if(cookieOtp == req.body.otp){
     redirect("/changeOtp");
   }
@@ -139,4 +138,33 @@ dashboardRouter.get("/addCategory", (req, res) => {
 dashboardRouter.post("/insertCategory", (req, res) => {
   console.log(req.body)
 })
+
+
+dashboardRouter.get("/addSubCategory", async (req, res) => {
+  try {
+    const categories = await CategoryModel.find({});
+    res.render("addSubCategory", { categories: categories });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+dashboardRouter.post("/insertSubCategory", async (req, res) => {
+  try {
+    await SubCategoryModel.create(req.body);
+    console.log("Subcategory created");
+    res.redirect("back")
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+dashboardRouter.get("/viewSubCategory", async (req, res) => {
+ let getData = await SubCategoryModel.find().populate("categoryId").exec();
+console.log(getData)
+  res.render("viewSubCategory",{getData})
+})
+
+
 module.exports = dashboardRouter;
