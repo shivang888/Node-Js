@@ -40,8 +40,11 @@ dashbordrouter.post("/isartdata",usermodel.imgupload,async(req,res)=>{
 
 
 dashbordrouter.get("/categoryList",passport.isAuth,(req, res) => {
-    
     res.render("categoryList")
+
+})
+dashbordrouter.get("/productList",passport.isAuth,(req, res) => {
+  res.render("productList")
 
 })
 
